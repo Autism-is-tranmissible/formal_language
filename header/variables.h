@@ -3,25 +3,25 @@
 #include "numbers.h"
 
 #include <optional>
+#include <string>
 
 namespace variables{
     using namespace numbers;
-    using namespace std;
-    
+
     class variable{
     public:
-        variable(string name){
+        variable(std::string name){
             nm = name;
         }
         variable(real value){
             val = value;
         }
-        variable(string name, real value){
+        variable(std::string name, real value){
             nm = name;
             val = value;
         }
 
-        variable& operator=(const string& name){
+        variable& operator=(const std::string& name){
             nm = name;
             return *this;
         }
@@ -30,17 +30,17 @@ namespace variables{
             return *this;
         }
 
-        optional <string> name(){
+        std::optional <std::string> name(){
             return nm;
         }
-        optional <real> value(){
+        std::optional <real> value(){
             return val;
         }
         real operator()(){
             return *val;
         }
     private:
-        optional <string> nm;
-        optional <real> val;
+        std::optional <std::string> nm;
+        std::optional <real> val;
     };
 }

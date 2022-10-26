@@ -1,6 +1,6 @@
-COMPILER = g++
+COMPILER = g++-12
 
-FLAGS = -std=c++17 -Wall -Wextra -Wshadow -Wswitch-enum
+FLAGS = -std=c++20 -Wall -Wextra -Wshadow -Wswitch-enum
 
 # GMPS = -lgmpxx -lgmp
 

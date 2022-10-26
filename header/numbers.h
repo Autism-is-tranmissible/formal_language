@@ -6,8 +6,6 @@
 #include <cassert>
 
 namespace numbers{
-    using namespace std;
-
     using ll = long long;
     using ld = long double;
 
@@ -68,12 +66,12 @@ namespace numbers{
         friend real to_irrational(real num){ return num.ucast_irrational(); }
 
         friend void ucast_sametype(real& lhs, real& rhs){
-            types t = max(lhs.get_type(), rhs.get_type());
+            types t = std::max(lhs.get_type(), rhs.get_type());
             lhs.cast(t); rhs.cast(t);
         }
-        friend pair <real, real> to_sametype(real lhs, real rhs){
+        friend std::pair <real, real> to_sametype(real lhs, real rhs){
             ucast_sametype(lhs, rhs);
-            return make_pair(lhs, rhs);
+            return std::make_pair(lhs, rhs);
         }
 
         real& operator+=(real rhs){
@@ -138,7 +136,7 @@ namespace numbers{
         }
         friend bool operator!=(const real& lhs, const real& rhs){ return !(lhs == rhs); }
 
-        friend ostream& operator<<(ostream& os, const real& rhs){
+        friend std::ostream& operator<<(std::ostream& os, const real& rhs){
             switch (rhs.type){
                 case types::integer: os << rhs.Zvalue; break;
                 case types::rational: os << rhs.Qvalue; break;
@@ -146,7 +144,7 @@ namespace numbers{
             }
             return os;
         }
-        friend istream& operator>>(istream& is, real& rhs){
+        friend std::istream& operator>>(std::istream& is, real& rhs){
             switch (rhs.type){
                 case types::integer: is >> rhs.Zvalue; break;
                 case types::rational: is >> rhs.Qvalue; break;
@@ -219,11 +217,11 @@ namespace numbers{
             }
             friend bool operator!=(const fraction& lhs, const fraction& rhs){ return !(lhs == rhs); }
             
-            friend ostream& operator<<(ostream& os, const fraction& rhs){
+            friend std::ostream& operator<<(std::ostream& os, const fraction& rhs){
                 os << rhs.nume << '/' << rhs.deno;
                 return os;
             }
-            friend istream& operator>>(istream& is, fraction& rhs){
+            friend std::istream& operator>>(std::istream& is, fraction& rhs){
                 is >> rhs.nume;
                 if (is.peek() == '/'){
                     is.get();
@@ -236,7 +234,7 @@ namespace numbers{
 
             void normalize(){
                 assert(deno != 0);
-                ll g = gcd(nume, deno);
+                ll g = std::gcd(nume, deno);
                 nume /= g; deno /= g;
                 if (deno < 0){
                     nume = -nume; deno = -deno;
