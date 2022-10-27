@@ -35,4 +35,12 @@ int main(){
         return f(a) + b;
     });
     std::cout << g(6.9l, 2.3l) << std::endl;
+    try{
+        real a = 2ll, b = 3ll;
+        a ^= b;
+        std::cout << a << std::endl;
+    }
+    catch (const math_exceptions::not_implemented& ex){
+        std::cout << "Not implemented: " << ex.what() << std::endl;
+    }
 }

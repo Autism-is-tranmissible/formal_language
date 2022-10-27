@@ -1,11 +1,15 @@
 #pragma once
 
+#include "exceptions.h"
+
 #include <ostream>
 #include <istream>
 #include <numeric>
 #include <cassert>
 
 namespace numbers{
+    using namespace math_exceptions;
+
     using ll = long long;
     using ld = long double;
 
@@ -114,6 +118,10 @@ namespace numbers{
             return *this;
         }
         friend real operator/(real lhs, const real& rhs){ lhs /= rhs; return lhs; }
+        real& operator^=(real rhs){
+            throw math_exceptions::not_implemented("exponentiation of reals");
+        }
+        friend real operator^(real lhs, const real& rhs){ lhs ^= rhs; return lhs; }
 
         friend bool operator<(real lhs, real rhs){
             ucast_sametype(lhs, rhs);
@@ -162,7 +170,9 @@ namespace numbers{
                 nume = val; deno = 1;
             }
             fraction(ll tnume, ll tdeno){
-                assert(tdeno != 0);
+                if (tdeno == 0){
+                    throw std::domain_error("denominator must not be zero");
+                }
                 nume = tnume; deno = tdeno;
                 normalize();
             }
@@ -233,7 +243,9 @@ namespace numbers{
             ll nume, deno;
 
             void normalize(){
-                assert(deno != 0);
+                if (deno == 0){
+                    
+                }
                 ll g = std::gcd(nume, deno);
                 nume /= g; deno /= g;
                 if (deno < 0){

@@ -8,12 +8,10 @@ PATH_TO_HEADER = -I./header
 
 FILES = 
 
-HEADERS = header/numbers.h header/variables.h header/functions.h
-
 TARGET = program
 
 all: $(TARGET)
 
-$(TARGET): $(TARGET).cpp $(HEADERS)
+$(TARGET): $(TARGET).cpp $(shell find header -type f)
 	$(COMPILER) $(FLAGS) $(PATH_TO_HEADER) $(FILES) $(TARGET).cpp -o $(TARGET)
 # $(GMPS) must be at the end
