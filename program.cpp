@@ -27,10 +27,12 @@ int main(){
     }
     var = 12.5l;
     std::cout << var() << std::endl;
-
-    auto add = [](const std::array <real, 2ul>& arr) -> real{
-        return arr[0] + arr[1];
-    };
-    function f(add);
-    std::cout << f({{6.9l, 2.2l}}) << std::endl;
+    
+    function f([](real a){
+        return a + a;
+    });
+    function g([&](real a, real b){
+        return f(a) + b;
+    });
+    std::cout << g(6.9l, 2.3l) << std::endl;
 }

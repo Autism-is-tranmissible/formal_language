@@ -2,24 +2,31 @@
 
 #include "numbers.h"
 
-#include <array>
 #include <string>
+#include <optional>
 
 namespace functions{
     using namespace numbers;
 
-    template <typename F, size_t argc = 2>
+    template <typename F>
     class function{
     public:
-        function(const F& lamb) requires std::is_invocable_r_v <real, F, const std::array <real, argc>>: func(lamb){
+        function(const F& fun): func(fun){
             
         }
+        function(std::string name, const F& fun): func(fun){
+            nm = name;
+        }
 
-        real operator()(const std::array <real, argc>& arr){
-            return func(arr);
+        std::optional <std::string> name(){
+            return nm;
+        }
+        template <typename... T>
+        real operator()(T... args){
+            return func(args...);
         }
     private:
+        std::optional <std::string> nm;
         F func;
-        std::string nm;
     };
 }
